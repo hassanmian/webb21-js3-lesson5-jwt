@@ -1,10 +1,12 @@
 // 1. Importera in useState
 import React, {useState} from 'react'
+import { useNavigate } from 'react-router-dom'
 
 export default function LoginPage() {
     // 2. definiera state variabler: email och password
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const navigate = useNavigate()
 
     // 3. Skapa en funktion som triggas när formuläret submittas
     function handleOnSubmit(e) {
@@ -22,6 +24,7 @@ export default function LoginPage() {
         .then(data => {
             const token = data.token
             localStorage.setItem("webb21-lesson5", token)
+            navigate('/posts')
         })
     }
 
