@@ -9,6 +9,20 @@ export default function LoginPage() {
     // 3. Skapa en funktion som triggas när formuläret submittas
     function handleOnSubmit(e) {
         e.preventDefault()
+        const url = "https://lab.willandskill.eu/api/v1/auth/api-token-auth/"
+        const payload = {email, password}
+        fetch(url, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        })
+        .then(res => res.json())
+        .then(data => {
+            const token = data.token
+            localStorage.setItem("webb21-lesson5", token)
+        })
     }
 
     return (
