@@ -22,6 +22,21 @@ export default function PostListPage() {
         .then(data => setPostList(data.results))
     }
 
+    function handleDeleteOnClick(id) {
+        const url = `https://lab.willandskill.eu/api/v1/forum/posts/${id}/`
+        const token = localStorage.getItem("webb21-lesson5")
+        const headers = {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
+        fetch(url, {
+            method: "DELETE",
+            headers: headers
+        })
+        .then(res => res.json())
+        .then(data => setPostList(data.results))
+    }
+
     return (
         <div>
             Post List
@@ -29,7 +44,10 @@ export default function PostListPage() {
             <button onClick={fetchData}>Refresh</button>
             {postList && postList.map((item, index) => {
                 return (
-                    <p key={index}>{item.title} - {item.content}</p>
+                    <div key={item.pk}>
+                        <p key={index}>{item.title} - {item.content}</p>
+                        <button onClick={ e => handleDeleteOnClick(item.id)}>DELETE</button>
+                    </div>
                 )
             })}
         </div>
