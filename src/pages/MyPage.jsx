@@ -39,6 +39,45 @@ export default function MyPage() {
 
     }, [])
 
+    function handleOnClickPut() {
+        const url = "https://lab.willandskill.eu/api/v1/me/"
+        const token = localStorage.getItem("webb21-lesson5")
+        const headers = {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
+        const payload = {
+            firstName: "Pelle 123",
+            lastName: "Svanslös",
+            phoneNumber: "123321123",
+            title: "Barista"
+        }
+        fetch(url, {
+            method: "PUT",
+            headers: headers,
+            body: JSON.stringify(payload)
+        }).then(res => res.json())
+        .then(data => setMyData(data))
+    }
+
+    function handleOnClickPatch() {
+        const url = "https://lab.willandskill.eu/api/v1/me/"
+        const token = localStorage.getItem("webb21-lesson5")
+        const headers = {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
+        const payload = {
+            firstName: "Pelle 123456",
+        }
+        fetch(url, {
+            method: "PATCH",
+            headers: headers,
+            body: JSON.stringify(payload)
+        }).then(res => res.json())
+        .then(data => setMyData(data))
+    }
+
     return (
         <div>
             My Information
@@ -50,6 +89,8 @@ export default function MyPage() {
                     <p>{myData.firstName}</p>
                     <p>{myData.lastName}</p>
                     <p>{myData.email}</p>
+                    <button onClick={handleOnClickPut}>Do a PUT</button>
+                    <button onClick={handleOnClickPatch}>Do a patch</button>
                 </>
             )}
         </div>
