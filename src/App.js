@@ -11,9 +11,10 @@ function App() {
       <h1>JWT</h1>
       <Routes>
         <Route path="/login" element={<LoginPage/>} />
+        <Route path="/user/create" element={<UserCreatePage />} />
+        
         <Route path="/my-page" element={<MyPage />} />
         <Route path="/posts" element={<PostListPage />} />
-        <Route path="/user/create" element={<UserCreatePage />} />
       </Routes>
     </div>
   );
